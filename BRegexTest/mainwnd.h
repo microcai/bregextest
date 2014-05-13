@@ -2,6 +2,7 @@
 #define MAINWND_H
 
 #include <QtGui/QMainWindow>
+#include <QtGui>
 #include "texteditor.h"
 
 class MainWnd : public QMainWindow

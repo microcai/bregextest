@@ -8,7 +8,7 @@ MainWnd::MainWnd(QWidget *parent, Qt::WFlags flags)
 {
 	setupToolBar();
 	createDockWidget();
-	setupActions();	
+	setupActions();
 }
 
 MainWnd::~MainWnd()
@@ -86,21 +86,21 @@ void MainWnd::regexMatch()
 	//Returns zero if the expression contains a valid regular expression, otherwise an error code.
 	if(0 != expression.status())
 		return;
-	std::wstring::const_iterator start, end; 
-	start = source.begin(); 
-	end = source.end(); 
-	boost::match_results<std::wstring::const_iterator> what; 
-	boost::match_flag_type match_flags = boost::match_default; 
-	while(boost::regex_search(start, end, what, expression, match_flags)) 
-	{ 
-		std::wstring &str = std::wstring(what[0].first, what[0].second);
+	std::wstring::const_iterator start, end;
+	start = source.begin();
+	end = source.end();
+	boost::match_results<std::wstring::const_iterator> what;
+	boost::match_flag_type match_flags = boost::match_default;
+	while(boost::regex_search(start, end, what, expression, match_flags))
+	{
+		std::wstring str = std::wstring(what[0].first, what[0].second);
 		matchesEdit->appendPlainText(QString::fromWCharArray(str.c_str()));
-		// update search position: 
+		// update search position:
 		if(start == what[0].second)
 			break;
-		start = what[0].second; 
-		// update flags: 
-		match_flags |= boost::match_prev_avail; 
-		match_flags |= boost::match_not_bob; 
-	} 
+		start = what[0].second;
+		// update flags:
+		match_flags |= boost::match_prev_avail;
+		match_flags |= boost::match_not_bob;
+	}
 }
